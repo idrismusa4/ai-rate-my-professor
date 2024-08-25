@@ -1,8 +1,7 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextRequest, NextResponse } from "next/server";
 import { invokeLlamaModel } from "./llama";
 import { generateEmbeddings } from "./embed";
 import { queryPineconeDatabase } from "./pinecone_query";
-import { NextRequest, NextResponse } from "next/server";
 
 // import { NextApiRequest, NextApiResponse } from 'next';
 // import { NextResponse } from 'next/server';
@@ -12,22 +11,25 @@ import { NextRequest, NextResponse } from "next/server";
 // import { queryPineconeDatabase } from './path/to/queryPineconeDatabase';
 // import { invokeLlamaModel } from './path/to/invokeLlamaModel';
 
-async function readRequestBody(req: NextApiRequest) {
-  const reader = req.body.getReader();
+async function readRequestBody(req: NextRequest): Promise<string> {
+  const reader = req.body?.getReader();
   const decoder = new TextDecoder();
   let body = "";
 
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    body += decoder.decode(value, { stream: true });
+  if (reader) {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      body += decoder.decode(value, { stream: true });
+    }
+    body += decoder.decode();
   }
-  body += decoder.decode();
+
   return body;
 }
 
 // POST function to handle incoming requests
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
+export async function POST(req: NextRequest) {
   try {
     const body = await readRequestBody(req);
     const { messages } = JSON.parse(body);
