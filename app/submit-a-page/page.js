@@ -12,6 +12,7 @@ export default function Component() {
   const [progress, setProgress] = useState(0);
   const [submitStatus, setSubmitStatus] = useState('idle');
 
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
