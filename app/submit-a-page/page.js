@@ -48,7 +48,7 @@ export default function Component() {
       </header>
 
       <main className="flex-grow container mx-auto px-4 py-8">
-        <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-8 text-center">Submit a Professor's Page</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-8 text-center">Submit a Professor&#39;s Page</h1>
         <p className="text-xl sm:text-2xl font-light mb-6 text-center">Help us expand our database by submitting a Professor's Bio page.</p>
 
         <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-6">

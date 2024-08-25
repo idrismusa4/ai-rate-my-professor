@@ -180,10 +180,10 @@ export default function Home() {
 
         <section className="text-center">
           <h2 className="text-2xl font-semibold mb-4">
-            Submit a Professor's Page
+            Submit a Professor&#39;s Page
           </h2>
           <p className="text-gray-600 mb-4">
-            Help us grow our database by submitting a professor's Nile Edu Lens
+            Help us grow our database by submitting a professor&#39;s Nile Edu Lens
             page
           </p>
           <Link
