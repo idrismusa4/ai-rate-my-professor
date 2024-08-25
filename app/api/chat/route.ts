@@ -46,6 +46,8 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
             name: match?.metadata?.name,
             designation: match?.metadata?.designation,
             department: match?.metadata?.department,
+            reviews: match?.metadata?.reviews,
+            courses: match?.metadata?.courses,
           })
         )
         .join("|") || "none");
@@ -61,6 +63,7 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
         ],
       },
     ];
+    console.log(resultString);
 
     const llamaResponse = await invokeLlamaModel(updatedMessages);
 

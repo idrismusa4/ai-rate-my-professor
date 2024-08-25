@@ -31,8 +31,7 @@ export const ChatProvider: React.FC<{ children: ReactNode }> = ({
   useEffect(() => {
     const systemPrompt = `
 You are a rate my professor agent to help students find classes, that takes in user questions and answers them.
-For every user question, the top 3 professors that match the user question are returned.
-Use them to answer the question if needed.
+If the users question requires a list of professors, then list the top 3 professors that match the users question.
 `;
     const initialChat: Message[] = [
       {

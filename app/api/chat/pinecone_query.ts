@@ -2,11 +2,11 @@ import { Pinecone } from "@pinecone-database/pinecone";
 // import fetch from "node-fetch";
 
 const pc = new Pinecone({
-  apiKey: process.env.PINECONE_API_KEY,
+  apiKey: process.env.PINECONE_API_KEY || "",
 //   fetch: fetch, // Provide node-fetch to Pinecone
 });
 
-const index = pc.index("rate-my-professor").namespace("nile-university");
+const index = pc.index("rate-my-professor").namespace("nile-university-of-nigeria");
 
 // Function to query Pinecone database
 export async function queryPineconeDatabase(embedding: number[]) {
