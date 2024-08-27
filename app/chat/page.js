@@ -25,11 +25,7 @@ export default function ChatInterface() {
 
   const sendMessage = async () => {
     if (!input.trim() || isLoading) return;
-<<<<<<< HEAD
-
-=======
     console.log(input)
->>>>>>> 1a70c3c (added user authentication and search functional)
     setInput("");
     setIsLoading(true);
 
@@ -132,22 +128,14 @@ export default function ChatInterface() {
       </header>
 
       <main className="flex-grow overflow-hidden flex flex-col p-4 border max-w-2xl w-full mx-auto">
-<<<<<<< HEAD
-        <div
-=======
         <div 
->>>>>>> 1a70c3c (added user authentication and search functional)
           ref={chatContainerRef}
           className="flex-grow overflow-y-auto mb-4 space-y-4"
         >
           {messages.slice(1).map((message, index) => {
             return message.content[0].text ? (
               <div
-<<<<<<< HEAD
-                key={index}
-=======
                 key={crypto.randomUUID()}
->>>>>>> 1a70c3c (added user authentication and search functional)
                 dangerouslySetInnerHTML={{
                   __html: marked.parse(message.content[0].text),
                 }}

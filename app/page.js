@@ -4,8 +4,6 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
-<<<<<<< HEAD
-=======
   ClerkProvider,
   SignInButton,
   SignUpButton,
@@ -17,7 +15,6 @@ import {
 
 
 import {
->>>>>>> 1a70c3c (added user authentication and search functional)
   Search,
   TrendingUp,
   Upload,
@@ -31,13 +28,9 @@ import { HiOutlineDocumentArrowUp } from "react-icons/hi2";
 import professors from "../professors_data.json";
 
 export default function Home() {
-<<<<<<< HEAD
-  const [isOpen, setIsOpen] = useState(false);
-=======
   const { user, isLoaded, isSignedIn } = useUser();
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
->>>>>>> 1a70c3c (added user authentication and search functional)
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -87,14 +80,6 @@ export default function Home() {
             >
               Submit
             </Link>
-<<<<<<< HEAD
-            <Link
-              href="/signin"
-              className="block lg:inline-block px-3 py-2 rounded-md text-sm font-medium bg-black text-white hover:bg-gray-700"
-            >
-              Sign In
-            </Link>
-=======
             {!isSignedIn && <><div
               style={{border: "1px solid black"}}
               className="block lg:inline-block px-3 py-2 rounded-md text-sm font-medium text-black hover:text-gray-700"
@@ -108,7 +93,6 @@ export default function Home() {
               <SignUpButton />
             </div></>}
             {isSignedIn && <UserButton />}
->>>>>>> 1a70c3c (added user authentication and search functional)
           </div>
         </nav>
       </header>
@@ -120,13 +104,6 @@ export default function Home() {
             Discover insights from students about professors across universities
           </p>
 
-<<<<<<< HEAD
-          <form className="max-w-md mx-auto mb-4">
-            <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2">
-              <input
-                type="text"
-                placeholder="Search by name, department, or university"
-=======
           <div className="max-w-md mx-auto mb-4">
             <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2">
               <input
@@ -134,18 +111,13 @@ export default function Home() {
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
                 placeholder="Search by name of professor"
->>>>>>> 1a70c3c (added user authentication and search functional)
                 className="flex-grow px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
               />
 
               <div className="flex space-x-2">
                 <Link
-<<<<<<< HEAD
-                  href="/searchresults"
-=======
 
                   href={"/searchresults"+"?query="+searchQuery}
->>>>>>> 1a70c3c (added user authentication and search functional)
                   className="flex items-center px-4 py-2 bg-black text-white rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500"
                 >
                   <FaSearch className="w-4 h-4 mr-2" />
@@ -165,11 +137,7 @@ export default function Home() {
                 </button>
               </div>
             </div>
-<<<<<<< HEAD
-          </form>
-=======
           </div>
->>>>>>> 1a70c3c (added user authentication and search functional)
 
           <div className="mt-4">
             <p className="text-gray-600">or</p>
@@ -235,18 +203,10 @@ export default function Home() {
 
         <section className="text-center">
           <h2 className="text-2xl font-semibold mb-4">
-<<<<<<< HEAD
-            Submit a Professor&#39;s Page
-          </h2>
-          <p className="text-gray-600 mb-4">
-            Help us grow our database by submitting a professor&#39;s Nile Edu Lens
-            page
-=======
             {"Submit a Professor's Page"}
           </h2>
           <p className="text-gray-600 mb-4">
             {"Help us grow our database by submitting a professor's Nile Edu Lens page"}
->>>>>>> 1a70c3c (added user authentication and search functional)
           </p>
           <Link
             href="/submit-a-page"
