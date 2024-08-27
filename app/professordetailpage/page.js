@@ -1,29 +1,17 @@
 "use client";
 
-<<<<<<< HEAD
-import React, { useEffect, useState, Suspense } from "react";
-=======
 import { useEffect, useState } from "react";
->>>>>>> 1a70c3c (added user authentication and search functional)
 import { FaStar, FaThumbsUp, FaThumbsDown, FaChartLine } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import professors from "../../professors_data.json";
 
-<<<<<<< HEAD
-function ProfessorDetailComponent() {
-  const [activeTab, setActiveTab] = useState("ratings");
-  const [id, setId] = useState(null);
-  const [professor, setProfessor] = useState({});
-  const [similarProfessors, setSimilarProfessors] = useState([]);
-=======
 export default function Component() {
   const [activeTab, setActiveTab] = useState("ratings");
   const [id, setId] = useState(null);
   const [professor, setProfessor] = useState({});
   const [similarProfessors, setSimilarProfessors] = useState({});
->>>>>>> 1a70c3c (added user authentication and search functional)
 
   const searchParams = useSearchParams();
   useEffect(() => {
@@ -84,15 +72,12 @@ export default function Component() {
                 {professor.university.replaceAll("-", " ")}
               </p>
               <div className="flex items-center justify-center md:justify-start space-x-4">
-<<<<<<< HEAD
-=======
                 {/* <div className="flex items-center">
                   <FaStar className="w-6 h-6 text-yellow-400 mr-1" />
                   <span className="text-2xl font-bold">
                     {professor.rating.toFixed(1)}
                   </span>
                 </div> */}
->>>>>>> 1a70c3c (added user authentication and search functional)
                 <p className="text-gray-600">
                   {professor.totalRatings} ratings
                 </p>
@@ -147,15 +132,12 @@ export default function Component() {
                           {professor.wouldTakeAgain}%
                         </span>
                       </div>
-<<<<<<< HEAD
-=======
                       {/* <div className="flex justify-between items-center">
                         <span>Level of Difficulty</span>
                         <span className="font-semibold">
                           {professor.levelOfDifficulty.toFixed(1)}/5
                         </span>
                       </div> */}
->>>>>>> 1a70c3c (added user authentication and search functional)
                     </div>
                   </div>
                 </div>
@@ -228,15 +210,12 @@ export default function Component() {
                       <p className="text-sm text-gray-600 capitalize">
                         {professor.university.replaceAll("-", " ")}
                       </p>
-<<<<<<< HEAD
-=======
                       {/* <div className="flex items-center mt-1">
                         <FaStar className="w-4 h-4 text-yellow-400 mr-1" />
                         <span className="text-sm font-medium">
                           {prof.rating.toFixed(1)}
                         </span>
                       </div> */}
->>>>>>> 1a70c3c (added user authentication and search functional)
                     </div>
                   </div>
                 </Link>
@@ -257,14 +236,3 @@ export default function Component() {
     </div>
   );
 }
-<<<<<<< HEAD
-
-export default function WrappedProfessorDetailComponent() {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <ProfessorDetailComponent />
-    </Suspense>
-  );
-}
-=======
->>>>>>> 1a70c3c (added user authentication and search functional)
