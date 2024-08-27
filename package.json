@@ -10,10 +10,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-bedrock-runtime": "^3.637.0",
-<<<<<<< HEAD
-=======
     "@clerk/nextjs": "^5.3.3",
->>>>>>> 1a70c3c (added user authentication and search functional)
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@mui/material": "^5.16.7",
