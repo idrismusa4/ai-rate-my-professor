@@ -1,7 +1,15 @@
+<<<<<<< HEAD
 import { NextRequest, NextResponse } from "next/server";
 import { invokeLlamaModel } from "./llama";
 import { generateEmbeddings } from "./embed";
 import { queryPineconeDatabase } from "./pinecone_query";
+=======
+import { NextApiRequest, NextApiResponse } from "next";
+import { invokeLlamaModel } from "./llama";
+import { generateEmbeddings } from "./embed";
+import { queryPineconeDatabase } from "./pinecone_query";
+import { NextRequest, NextResponse } from "next/server";
+>>>>>>> 1a70c3c (added user authentication and search functional)
 
 // import { NextApiRequest, NextApiResponse } from 'next';
 // import { NextResponse } from 'next/server';
@@ -11,6 +19,7 @@ import { queryPineconeDatabase } from "./pinecone_query";
 // import { queryPineconeDatabase } from './path/to/queryPineconeDatabase';
 // import { invokeLlamaModel } from './path/to/invokeLlamaModel';
 
+<<<<<<< HEAD
 async function readRequestBody(req: NextRequest): Promise<string> {
   const reader = req.body?.getReader();
   const decoder = new TextDecoder();
@@ -25,11 +34,28 @@ async function readRequestBody(req: NextRequest): Promise<string> {
     body += decoder.decode();
   }
 
+=======
+async function readRequestBody(req: NextApiRequest) {
+  const reader = req.body.getReader();
+  const decoder = new TextDecoder();
+  let body = "";
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    body += decoder.decode(value, { stream: true });
+  }
+  body += decoder.decode();
+>>>>>>> 1a70c3c (added user authentication and search functional)
   return body;
 }
 
 // POST function to handle incoming requests
+<<<<<<< HEAD
 export async function POST(req: NextRequest) {
+=======
+export async function POST(req: NextApiRequest, res: NextApiResponse) {
+>>>>>>> 1a70c3c (added user authentication and search functional)
   try {
     const body = await readRequestBody(req);
     const { messages } = JSON.parse(body);

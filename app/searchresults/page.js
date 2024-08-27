@@ -1,4 +1,5 @@
 "use client";
+<<<<<<< HEAD
 import { useState } from 'react';
 import { FaSearch, FaStar, FaFilter } from 'react-icons/fa';
 import Link from 'next/link';
@@ -14,6 +15,95 @@ export default function Component() {
     { id: 2, name: 'Prof. John Doe', department: 'Physics', university: 'Science College', rating: 4.5, imageUrl: '/placeholder.svg?height=100&width=100', recentReview: 'Challenging but fair. Explains complex concepts well.' },
     { id: 3, name: 'Dr. Emily Brown', department: 'Psychology', university: 'Liberal Arts University', rating: 4.7, imageUrl: '/placeholder.svg?height=100&width=100', recentReview: 'Engaging lectures and interesting assignments.' },
   ];
+=======
+import { useState, useEffect } from 'react';
+import { FaSearch, FaStar, FaFilter } from 'react-icons/fa';
+import Link from 'next/link';
+import Image from 'next/image';
+import { useSearchParams } from 'next/navigation.js';
+import professors from "../../professors_data.json";
+
+
+export default function Component() {
+  const searchParams = useSearchParams()
+  const [searchFilters, setSearchFilters] = useState({
+    searchQuery: searchParams.get("query") || "",
+    sortBy: "rating",
+    department: [],
+    rating: []
+  })
+  const [showFilters, setShowFilters] = useState(false);
+  const [searchResults, setSearchResults] = useState([]);
+
+  function calculateAverageRating(reviews) {
+    if (reviews.length === 0) return 0;
+
+    let totalRating = reviews.reduce((acc, review) => acc + review.rating, 0);
+    return Math.round(totalRating / reviews.length);
+}
+
+  function updateSearch() {
+    console.log(searchFilters)
+    let res
+    if(searchFilters.searchQuery) {
+      res = professors.filter(p => p.name.toLocaleLowerCase().includes(searchFilters.searchQuery.toLocaleLowerCase()))
+    }
+    
+    if(searchFilters.department.length) {
+      res = professors.filter(p => searchFilters.department.includes(p.department))
+    }
+    
+    if(searchFilters.rating.length) {
+      let rangeArr = searchFilters.rating.map(e => e.split(" - ")).flat(1).map(t => parseInt(t))
+      res = professors.filter(p => calculateAverageRating(p.reviews) >= Math.min(...rangeArr) && calculateAverageRating(p.reviews) <= Math.max(...rangeArr))
+    }
+
+    let sortedRes = res.sort((a,b) => {
+      if(searchFilters.sortBy === "rating") {
+        return calculateAverageRating(b.reviews)-calculateAverageRating(a.reviews)
+      }
+
+      if(searchFilters.sortBy === "name") {
+        if(a.name.toLocaleLowerCase()<b.name.toLocaleLowerCase())return -1
+        if(a.name.toLocaleLowerCase()>b.name.toLocaleLowerCase())return 1
+        return 0
+      }
+
+      if(searchFilters.sortBy === "reviews") {
+        return b.reviews.length - a.reviews.length
+      }
+    })
+
+    setSearchResults(sortedRes)
+    console.log(sortedRes)
+  }
+
+  function modDepartments(department) {
+    if(searchFilters.department.includes(department)) {
+      let temp = searchFilters.department.filter(e => e !== department)
+      setSearchFilters(prev => {return { ...prev, department: temp }})
+    } else {
+      let temp = searchFilters.department
+      setSearchFilters(prev => {return { ...prev, department: [...temp, department] }})
+    }
+
+  }
+
+  function modRating(rating) {
+    if(searchFilters.rating.includes(rating)) {
+      let temp = searchFilters.rating.filter(e => e !== rating)
+      setSearchFilters(prev => {return { ...prev, rating: temp }})
+    } else {
+      let temp = searchFilters.rating
+      setSearchFilters(prev => {return { ...prev, rating: [...temp, rating] }})
+    }
+
+  }
+
+  useEffect(() => updateSearch
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  , []);
+>>>>>>> 1a70c3c (added user authentication and search functional)
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
@@ -34,17 +124,31 @@ export default function Component() {
         <div className="flex flex-col sm:flex-row mb-6 gap-2">
           <input
             type="text"
+<<<<<<< HEAD
             placeholder="Search by name, department, or university"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+=======
+            placeholder="Search a professor's name"
+            value={searchFilters.searchQuery}
+            onChange={(e) => setSearchFilters(prev => {return{ ...prev, searchQuery: e.target.value }})}
+>>>>>>> 1a70c3c (added user authentication and search functional)
             className="flex-grow px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <button
             type="button"
+<<<<<<< HEAD
             className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-700 flex items-center justify-center"
           >
             <FaSearch className="w-4 h-4 mr-2" />
             Search
+=======
+            onClick={updateSearch}
+            className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-700 flex items-center justify-center"
+          >
+            <FaSearch className="w-4 h-4 mr-2" />
+            Update Search
+>>>>>>> 1a70c3c (added user authentication and search functional)
           </button>
         </div>
 
@@ -63,6 +167,7 @@ export default function Component() {
             <div className={`space-y-6 ${showFilters ? 'block' : 'hidden md:block'}`}>
               <div>
                 <h3 className="font-semibold mb-2">Department</h3>
+<<<<<<< HEAD
                 <div className="space-y-2">
                   <label className="flex items-center space-x-2">
                     <input type="checkbox" id="cs" className="form-checkbox" />
@@ -76,11 +181,27 @@ export default function Component() {
                     <input type="checkbox" id="psychology" className="form-checkbox" />
                     <span>Psychology</span>
                   </label>
+=======
+                <div className="space-y-2">{
+                  ["Computer Science", "Physics", "Psychology"].map((dep, ind) => {
+                    return <label key={ind} className="flex items-center space-x-2">
+                    <input 
+                      type="checkbox" 
+                      id="cs" 
+                      className="form-checkbox" 
+                      checked={searchFilters.department.includes(dep)}
+                      onChange={() => modDepartments(dep)}
+                    />
+                    <span>{dep}</span>
+                  </label>
+                  })}
+>>>>>>> 1a70c3c (added user authentication and search functional)
                 </div>
               </div>
               <div>
                 <h3 className="font-semibold mb-2">Rating</h3>
                 <div className="space-y-2">
+<<<<<<< HEAD
                   <label className="flex items-center space-x-2">
                     <input type="checkbox" id="4-5" className="form-checkbox" />
                     <span>4 - 5</span>
@@ -93,6 +214,21 @@ export default function Component() {
                     <input type="checkbox" id="2-3" className="form-checkbox" />
                     <span>2 - 3</span>
                   </label>
+=======
+                {
+                  ["4 - 5", "3 - 4", "2 - 3"].map((rating, ind) => {
+                    return <label key={ind} className="flex items-center space-x-2">
+                    <input 
+                      type="checkbox" 
+                      id={rating} 
+                      className="form-checkbox" 
+                      checked={searchFilters.rating.includes(rating)}
+                      onChange={() => modRating(rating)}
+                    />
+                    <span>{rating}</span>
+                  </label>
+                  })}
+>>>>>>> 1a70c3c (added user authentication and search functional)
                 </div>
               </div>
             </div>
@@ -103,8 +239,13 @@ export default function Component() {
               <p className="text-gray-600">{searchResults.length} results found</p>
               <div className="relative w-full sm:w-auto">
                 <select
+<<<<<<< HEAD
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
+=======
+                  value={searchFilters.sortBy}
+                  onChange={(e) => setSearchFilters(prev => {return{ ...prev, sortBy: e.target.value}})}
+>>>>>>> 1a70c3c (added user authentication and search functional)
                   className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
                 >
                   <option value="rating">Highest Rated</option>
@@ -119,7 +260,11 @@ export default function Component() {
                 <Link key={professor.id} href={`/professordetailpage?id=${professor.id}`} className="bg-white border border-gray-200 rounded-md shadow-sm">
                   <div className="p-4 flex items-center space-x-4">
                     <Image
+<<<<<<< HEAD
                       src={professor.imageUrl}
+=======
+                      src={professor.image_url}
+>>>>>>> 1a70c3c (added user authentication and search functional)
                       alt={professor.name}
                       width={64}
                       height={64}
@@ -131,7 +276,11 @@ export default function Component() {
                       <p className="text-sm text-gray-600">{professor.university}</p>
                       <div className="flex items-center mt-1">
                         <FaStar className="w-4 h-4 text-yellow-400 mr-1" />
+<<<<<<< HEAD
                         <span className="text-sm font-medium">{professor.rating.toFixed(1)}</span>
+=======
+                        <span className="text-sm font-medium">{calculateAverageRating(professor.reviews).toFixed(1)}</span>
+>>>>>>> 1a70c3c (added user authentication and search functional)
                       </div>
                     </div>
                   </div>

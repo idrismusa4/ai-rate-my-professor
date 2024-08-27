@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+/* eslint-disable react/no-unescaped-entities */
+>>>>>>> 1a70c3c (added user authentication and search functional)
 "use client";
 
 import { useState } from 'react';
@@ -12,7 +16,10 @@ export default function Component() {
   const [progress, setProgress] = useState(0);
   const [submitStatus, setSubmitStatus] = useState('idle');
 
+<<<<<<< HEAD
   
+=======
+>>>>>>> 1a70c3c (added user authentication and search functional)
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -49,8 +56,13 @@ export default function Component() {
       </header>
 
       <main className="flex-grow container mx-auto px-4 py-8">
+<<<<<<< HEAD
         <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-8 text-center">Submit a Professor&#39;s Page</h1>
         <p className="text-xl sm:text-2xl font-light mb-6 text-center">Help us expand our database by submitting a Professor&#39;s Bio page.</p>
+=======
+        <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-8 text-center">Submit a Professor's Page</h1>
+        <p className="text-xl sm:text-2xl font-light mb-6 text-center">Help us expand our database by submitting a Professor's Bio page.</p>
+>>>>>>> 1a70c3c (added user authentication and search functional)
 
         <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-6">
           <div>
@@ -111,7 +123,11 @@ export default function Component() {
             <div className="text-center sm:text-left">
               <h3 className="text-lg font-semibold">Success</h3>
               <p className="text-gray-700">
+<<<<<<< HEAD
                 The professor&#39;s page has been successfully added to our database. Thank you for your contribution!
+=======
+                The professor's page has been successfully added to our database. Thank you for your contribution!
+>>>>>>> 1a70c3c (added user authentication and search functional)
               </p>
             </div>
           </div>
